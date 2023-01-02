@@ -6,3 +6,15 @@
   box-sizing: border-box;
   font-size: 16px;
 }
+
+.projects {
+  width: 90%;
+}
+
+.card {
+  width: 15rem;
+}
+
+.btn-card {
+  margin: auto;
+}
