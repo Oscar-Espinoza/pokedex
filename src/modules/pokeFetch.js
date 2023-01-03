@@ -63,7 +63,7 @@ export const pokeFetch = async () => {
     await fetch(el.url)
       .then((response) => response.json())
       .then((data) => {
-        createPokeCard(data.name, data.sprites.front_shiny, 5)
+        createPokeCard(data.name, data.sprites.other['official-artwork'].front_default, 5)
         pokemonList.push({
           name: data.name,
           imgUrl: data.sprites.front_shiny,
