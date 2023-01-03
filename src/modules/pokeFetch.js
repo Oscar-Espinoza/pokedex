@@ -1,3 +1,4 @@
+import { postLike, getLikes } from './involvementApi';
 export const createPokeCard = (name, imgSrc, likes) => {
   const divCard = document.createElement('div');
   divCard.classList.add('card');
@@ -7,13 +8,22 @@ export const createPokeCard = (name, imgSrc, likes) => {
       <div class='card-body'>
         <div class='card-title d-flex justify-content-between'>
             <h5 class='card-title'>${name}</h5>
-            <h5 class='card-title'><i class='fa-regular fa-heart p-2'></i><span class='px-2'>${likes}</span>Likes</h5>
+            <h5 class='card-title'><i class='fa-regular fa-heart p-2 heart-icon'></i><span class='px-2'>${likes}</span>Likes</h5>
         </div>
         <div class='mx-auto d-grid'>
             <a href='#' class='btn btn-primary mt-4'>Comments</a>
             <a href='#' class='btn btn-primary mt-4'>Reservations</a>
         </div>
       </div>`;
+    divCard.querySelector('.fa-heart').addEventListener('click', (e) => {
+      const likeBtn = e.target
+      if (!likeBtn.classList.contains('liked')) {
+        likeBtn.classList.add('fa-solid','liked')
+        postLike(name)
+      } else {
+        likeBtn.classList.remove('fa-solid','liked')
+      }
+    });
     document.getElementById('cards').appendChild(divCard);
 }
 
@@ -56,6 +66,8 @@ export const pokeFetch = async () => {
       'url': 'https://pokeapi.co/api/v2/pokemon/caterpie'
     },
   ]
+
+  const likes = await getLikes()
   
   const pokemonList = []
 
@@ -63,7 +75,8 @@ export const pokeFetch = async () => {
     await fetch(el.url)
       .then((response) => response.json())
       .then((data) => {
-        createPokeCard(data.name, data.sprites.other['official-artwork'].front_default, 5)
+        const pokeLikes = likes.find((pokemon) => pokemon.item_id == data.name)
+        createPokeCard(data.name, data.sprites.other['official-artwork'].front_default, pokeLikes ? pokeLikes.likes : 0 )
         pokemonList.push({
           name: data.name,
           imgUrl: data.sprites.front_shiny,

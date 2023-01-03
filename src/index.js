@@ -3,15 +3,17 @@ import { postLike, getLikes, postComment, getCommets } from './modules/involveme
 import { updateModal } from './modules/popUp';
 import { pokeFetch, createPokeCard } from './modules/pokeFetch'
 
-let pokemonList = []
+let pokemonList = [];
+
 document.addEventListener('DOMContentLoaded', async () => {
-  pokemonList = await pokeFetch()
-  console.log(pokemonList);
+  console.log(await getCommets('1'));
+  pokemonList = await pokeFetch();
 });
 
 
 document.getElementById('exampleModal').addEventListener('show.bs.modal', (e) => {
-  const modal = e.target
-  const trigger = e.relatedTarget
-  updateModal(modal, trigger)
-})
+  const modal = e.target;
+  const trigger = e.relatedTarget;
+  updateModal(modal, trigger);
+});
+
