@@ -8,16 +8,17 @@ export const postLike = (pokeName) => {
       item_id: pokeName,
     }),
   })
-  .then((res) => res.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error));
+  .then((res) => res.text())
+  .then((data) => console.log(data))
 }
 
-export const getLikes = () => {
-  fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/likes')
+export const getLikes = async () => {
+  let likes = []
+  await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/likes')
   .then((res) => res.json())
-    .then((data) => console.log(data))
+    .then((data) => likes = data)
     .catch((error) => console.log(error));
+  return likes
 }
 
 export const postComment = (pokeName, username, comment) => {
@@ -42,5 +43,4 @@ export const getCommets = (pokeName) => {
   .then((res) => res.json())
     .then((data) => console.log(data))
     .catch((error) => console.log(error));
-    
 }
