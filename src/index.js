@@ -1,4 +1,5 @@
 import './style.css';
+import pokeFetch from './modules/pokeFetch'
 
 document.getElementById('cards').innerHTML = 
 
@@ -86,3 +87,6 @@ document.getElementById('cards').innerHTML =
         </div>
     </div>
 `;
+
+
+document.addEventListener('DOMContentLoaded', pokeFetch);
