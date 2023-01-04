@@ -1,4 +1,4 @@
-import { postComment, getCommets } from "./involvementApi";
+import { postComment, getComments } from "./involvementApi";
 import { commentSubmit } from "./comment";
 
 export const updateModal = async (modal, trigger) => {
@@ -7,7 +7,7 @@ export const updateModal = async (modal, trigger) => {
   modal.querySelector("#modal-img").src = pokeImgUrl;
   modal.querySelector("#exampleModalLabel").innerText = pokeName;
 
-  const comments = await getCommets(pokeName);
+  const comments = await getComments(pokeName);
 
   modal.querySelector("#comment-counter").innerHTML = comments.length;
 
