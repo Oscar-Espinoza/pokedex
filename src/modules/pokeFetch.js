@@ -70,8 +70,8 @@ export const pokeFetch = async () => {
     await fetch(el.url)
       .then((response) => response.json())
       .then((data) => {
-        const pokeLikes = likes.find((pokemon) => pokemon.item_id == data.name)
-        createPokeCard(data.name, data.sprites.other['official-artwork'].front_default, pokeLikes ? pokeLikes.likes : 0, data.types[0].type.name)
+        const pokeLikes = likes.find((pokemon) => pokemon.item_id == data.name);
+        createPokeCard(data.name, data.sprites.other['official-artwork'].front_default, pokeLikes ? pokeLikes.likes : 0, data.types[0].type.name);
         pokemonList.push({
           name: data.name,
           imgUrl: data.sprites.front_shiny,
@@ -80,5 +80,5 @@ export const pokeFetch = async () => {
         });
       });
   }
-  return pokemonList
+  return pokemonList;
 }
