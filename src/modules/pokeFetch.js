@@ -1,11 +1,10 @@
-import { getLikes } from './involvementApi';
-import { handleLike } from './likes';
+import { handleLike } from "./likes";
+import { postLike, getLikes, getCommets } from "./involvementApi";
 export const createPokeCard = (name, imgSrc, likes) => {
-  const divCard = document.createElement('div');
-  divCard.classList.add('card');
-  divCard.classList.add('m-4');
-  divCard.innerHTML = 
-    `<img src='${imgSrc}' id='${name}-img' class='card-img-top' alt='...' data-bs-toggle='modal' data-bs-name=${name} data-bs-img=${imgSrc} data-bs-target='#exampleModal'>
+  const divCard = document.createElement("div");
+  divCard.classList.add("card");
+  divCard.classList.add("m-4");
+  divCard.innerHTML = `<img src='${imgSrc}' id='${name}-img' class='card-img-top' alt='...' data-bs-toggle='modal' data-bs-name=${name} data-bs-img=${imgSrc} data-bs-target='#exampleModal'>
       <div class='card-body'>
         <div class='card-title d-flex justify-content-between'>
             <h5 class='card-title'>${name}</h5>
@@ -16,69 +15,73 @@ export const createPokeCard = (name, imgSrc, likes) => {
             <a href='#' class='btn btn-primary mt-4'>Reservations</a>
         </div>
       </div>`;
-    divCard.querySelector('.fa-heart').addEventListener('click', (e) => {
-      const likeBtn = e.target
-      handleLike(likeBtn, name)
-    });
-    document.getElementById('cards').appendChild(divCard);
-}
+  divCard.querySelector(".fa-heart").addEventListener("click", (e) => {
+    const likeBtn = e.target;
+    handleLike(likeBtn, name);
+  });
+  document.getElementById("cards").appendChild(divCard);
+};
 
 export const pokeFetch = async () => {
   const pokeChar = [
     {
-      'id': 0,
-      'url': 'https://pokeapi.co/api/v2/pokemon/ivysaur'
+      id: 0,
+      url: "https://pokeapi.co/api/v2/pokemon/ivysaur",
     },
     {
-      'id': 1,
-      'url': 'https://pokeapi.co/api/v2/pokemon/squirtle'
+      id: 1,
+      url: "https://pokeapi.co/api/v2/pokemon/squirtle",
     },
     {
-      'id': 2,
-      'url': 'https://pokeapi.co/api/v2/pokemon/wartortle'
+      id: 2,
+      url: "https://pokeapi.co/api/v2/pokemon/wartortle",
     },
     {
-      'id': 3,
-      'url': 'https://pokeapi.co/api/v2/pokemon/blastoise'
+      id: 3,
+      url: "https://pokeapi.co/api/v2/pokemon/blastoise",
     },
     {
-      'id': 4,
-      'url': 'https://pokeapi.co/api/v2/pokemon/charmander'
+      id: 4,
+      url: "https://pokeapi.co/api/v2/pokemon/charmander",
     },
     {
-      'id': 5,
-      'url': 'https://pokeapi.co/api/v2/pokemon/charmeleon'
+      id: 5,
+      url: "https://pokeapi.co/api/v2/pokemon/charmeleon",
     },
     {
-      'id': 6,
-      'url': 'https://pokeapi.co/api/v2/pokemon/venusaur'
+      id: 6,
+      url: "https://pokeapi.co/api/v2/pokemon/venusaur",
     },
     {
-      'id': 7,
-      'url': 'https://pokeapi.co/api/v2/pokemon/charizard'
+      id: 7,
+      url: "https://pokeapi.co/api/v2/pokemon/charizard",
     },
     {
-      'id': 8,
-      'url': 'https://pokeapi.co/api/v2/pokemon/caterpie'
+      id: 8,
+      url: "https://pokeapi.co/api/v2/pokemon/caterpie",
     },
-  ]
+  ];
 
-  const likes = await getLikes()
-  
-  const pokemonList = []
+  const likes = await getLikes();
+
+  const pokemonList = [];
 
   for (const el of pokeChar) {
     await fetch(el.url)
       .then((response) => response.json())
       .then((data) => {
-        const pokeLikes = likes.find((pokemon) => pokemon.item_id == data.name)
-        createPokeCard(data.name, data.sprites.other['official-artwork'].front_default, pokeLikes ? pokeLikes.likes : 0 )
+        const pokeLikes = likes.find((pokemon) => pokemon.item_id == data.name);
+        createPokeCard(
+          data.name,
+          data.sprites.other["official-artwork"].front_default,
+          pokeLikes ? pokeLikes.likes : 0
+        );
         pokemonList.push({
           name: data.name,
           imgUrl: data.sprites.front_shiny,
-          stats: data.stats
+          stats: data.stats,
         });
       });
   }
-  return pokemonList
-}
+  return pokemonList;
+};
