@@ -1,25 +1,15 @@
 import { postComment, getCommets } from "./involvementApi";
+import { commentSubmit } from "./comment";
+
 export const updateModal = async (modal, trigger) => {
   const pokeName = trigger.getAttribute("data-bs-name");
   const pokeImgUrl = document.getElementById(`${pokeName}-img`).src;
   modal.querySelector("#modal-img").src = pokeImgUrl;
   modal.querySelector("#exampleModalLabel").innerText = pokeName;
 
-  modal.querySelector("#modal-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const pokeName = trigger.getAttribute("data-bs-name");
-    const userName = document.querySelector("#username").value;
-    const commentBody = document.querySelector("#comment").value;
-    postComment(pokeName, userName, commentBody);
-    document.querySelector("#username").value = "";
-    document.querySelector("#comment").value = "";
-  });
-
   const comments = await getCommets(pokeName);
 
   modal.querySelector("#comment-counter").innerHTML = comments.length;
-
-  console.log(comments);
 
   let output = "";
   comments.forEach((el) => {
