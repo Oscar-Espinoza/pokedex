@@ -1,5 +1,5 @@
-import { postComment } from "./involvementApi";
-export const updateModal = (modal, trigger) => {
+import { postComment, getCommets } from "./involvementApi";
+export const updateModal = async (modal, trigger) => {
   const pokeName = trigger.getAttribute("data-bs-name");
   const pokeImgUrl = document.getElementById(`${pokeName}-img`).src;
   modal.querySelector("#modal-img").src = pokeImgUrl;
@@ -11,5 +11,19 @@ export const updateModal = (modal, trigger) => {
     postComment(pokeName, userName, commentBody);
     document.querySelector("#username").value = "";
     document.querySelector("#comment").value = "";
+  });
+
+  const comments = await getCommets(pokeName);
+  console.log(comments);
+
+  let output = "";
+  comments.forEach((el) => {
+    output += `
+                <li class="comment list-group-item text-start p-2">
+                <span class="fst-italic">${el.creation_date}</span> <span class="h6">${el.username}</span>: <span>${el.comment}</span>
+                </li>
+    `;
+
+    modal.querySelector("#comments").innerHTML = output;
   });
 };
