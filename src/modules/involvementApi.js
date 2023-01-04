@@ -38,11 +38,12 @@ export const postComment = (pokeName, username, comment) => {
     .catch((error) => console.log(error));
 }
 
-export const getCommets = async (pokeName) => {
+export const getComments = async (pokeName) => {
   let comments = []
   await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/comments?item_id=${pokeName}`)
   .then((res) => res.json())
     .then((data) => comments = data)
     .catch((error) => console.log(error));
+  console.log(comments);
   return comments
 }
