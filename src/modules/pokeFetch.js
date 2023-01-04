@@ -1,4 +1,5 @@
-import { postLike, getLikes } from './involvementApi';
+import { getLikes } from './involvementApi';
+import { handleLike } from './likes';
 export const createPokeCard = (name, imgSrc, likes) => {
   const divCard = document.createElement('div');
   divCard.classList.add('card');
@@ -17,12 +18,7 @@ export const createPokeCard = (name, imgSrc, likes) => {
       </div>`;
     divCard.querySelector('.fa-heart').addEventListener('click', (e) => {
       const likeBtn = e.target
-      if (!likeBtn.classList.contains('liked')) {
-        likeBtn.classList.add('fa-solid','liked')
-        postLike(name)
-      } else {
-        likeBtn.classList.remove('fa-solid','liked')
-      }
+      handleLike(likeBtn, name)
     });
     document.getElementById('cards').appendChild(divCard);
 }
