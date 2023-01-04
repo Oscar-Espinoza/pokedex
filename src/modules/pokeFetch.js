@@ -1,9 +1,8 @@
 import { getLikes } from './involvementApi';
 import { handleLike } from './likes';
-export const createPokeCard = (name, imgSrc, likes) => {
+export const createPokeCard = (name, imgSrc, likes, type) => {
   const divCard = document.createElement('div');
-  divCard.classList.add('card');
-  divCard.classList.add('m-4');
+  divCard.classList.add('card', 'm-4', type);
   divCard.innerHTML = 
     `<img src='${imgSrc}' id='${name}-img' class='card-img-top' alt='...' data-bs-toggle='modal' data-bs-name=${name} data-bs-img=${imgSrc} data-bs-target='#exampleModal'>
       <div class='card-body'>
@@ -59,7 +58,7 @@ export const pokeFetch = async () => {
     },
     {
       'id': 8,
-      'url': 'https://pokeapi.co/api/v2/pokemon/caterpie'
+      'url': 'https://pokeapi.co/api/v2/pokemon/vileplume'
     },
   ]
 
@@ -72,11 +71,12 @@ export const pokeFetch = async () => {
       .then((response) => response.json())
       .then((data) => {
         const pokeLikes = likes.find((pokemon) => pokemon.item_id == data.name)
-        createPokeCard(data.name, data.sprites.other['official-artwork'].front_default, pokeLikes ? pokeLikes.likes : 0 )
+        createPokeCard(data.name, data.sprites.other['official-artwork'].front_default, pokeLikes ? pokeLikes.likes : 0, data.types[0].type.name)
         pokemonList.push({
           name: data.name,
           imgUrl: data.sprites.front_shiny,
-          stats: data.stats
+          stats: data.stats,
+          type: data.types[0].type.name
         });
       });
   }
