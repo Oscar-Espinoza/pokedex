@@ -1,4 +1,5 @@
 import { getComments } from './involvementApi.js';
+import { injectComment } from './comment.js';
 
 export const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
@@ -7,23 +8,25 @@ export const updateModal = async (modal, pokemon) => {
   const pokeImgUrl = pokemon.imgUrl;
   modal.querySelector('#modal-img').src = pokeImgUrl;
   modal.querySelector('#exampleModalLabel').innerText = capitalizeFirstLetter(pokeName);
-
   const comments = await getComments(pokeName);
+  const commentsList = document.getElementById('comments')
 
-  modal.querySelector(
-    '#comment-counter',
-  ).innerText = `Comments: ${comments.length}`;
+  commentsList.innerHTML = '';
 
-  let output = '';
-  comments.forEach((el) => {
-    output += `
-                <li class="comment list-group-item text-start p-2">
-                <span class="fst-italic">${el.creation_date}</span> <span class="h6">${el.username}</span>: <span>${el.comment}</span>
-                </li>
-    `;
+  if (!comments.hasOwnProperty('error')) {
 
-    modal.querySelector('#comments').innerHTML = output;
-  });
+    modal.querySelector(
+      '#comment-counter',
+    ).innerHTML = `<p>Comments: <span id='comment-amount'>${comments.length}</span></p>`;
+
+    comments.forEach((comment) => {
+      injectComment(comment)
+    });
+  } else {
+    modal.querySelector(
+      '#comment-counter',
+    ).innerText = 'Be the first comment';
+  }
 
   document.querySelectorAll('.stat').forEach((stat) => {
     const foundStat = pokemon.stats.find(

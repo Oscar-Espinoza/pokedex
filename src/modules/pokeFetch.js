@@ -4,6 +4,14 @@ import { getLikes } from './involvementApi.js';
 import handleLike from './likes.js';
 import { capitalizeFirstLetter } from './popUp.js';
 
+const getLikesFromPokemon = (likesList, pokeName) => {
+  let pokeLikes = likesList.find((pokemon) => pokemon.item_id === pokeName)
+  if (pokeLikes !== undefined) {
+    pokeLikes = pokeLikes.likes
+  }
+  return pokeLikes
+}
+
 export const createPokeCard = (name, imgSrc, likes, type) => {
   const divCard = document.createElement('div');
   divCard.classList.add('card', 'm-4', type);
@@ -65,16 +73,17 @@ export const pokeFetch = async () => {
   ];
 
   const pokemonList = [];
+  const likesList = await getLikes();
 
   for (const el of pokeChar) {
     await fetch(el.url)
       .then((response) => response.json())
       .then(async (data) => {
-        const likes = await getLikes(data.name);
+        const pokeLikes = getLikesFromPokemon(likesList, data.name)
         createPokeCard(
           data.name,
           data.sprites.other['official-artwork'].front_default,
-          likes || 0,
+          pokeLikes || 0,
           data.types[0].type.name,
         );
         pokemonList.push({

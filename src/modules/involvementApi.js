@@ -1,7 +1,9 @@
 /* eslint-disable no-console, no-return-assign */
+const appId = 'QytFtqgqu0l6D6O2kqi1';
+
 export const postLike = (pokeName) => {
   fetch(
-    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/likes',
+    `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${appId}/likes`,
     {
       method: 'POST',
       headers: {
@@ -16,21 +18,21 @@ export const postLike = (pokeName) => {
     .then((data) => console.log(data));
 };
 
-export const getLikes = async (pokeName) => {
+export const getLikes = async () => {
   let likes = [];
   await fetch(
-    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/likes',
+    `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${appId}/likes`,
   )
     .then((res) => res.json())
     .then((data) => (likes = data))
     .catch((error) => console.log(error));
-  const pokeLikes = likes.find((pokemon) => pokemon.item_id === pokeName).likes;
-  return pokeLikes;
+
+  return likes;
 };
 
-export const postComment = (pokeName, username, comment) => {
-  fetch(
-    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/comments',
+export const postComment = async(pokeName, username, comment) => {
+  await fetch(
+    `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${appId}/comments`,
     {
       method: 'POST',
       headers: {
@@ -44,14 +46,14 @@ export const postComment = (pokeName, username, comment) => {
     },
   )
     .then((res) => res.text())
-    .then((data) => console.log(data))
+    .then((data) => data)
     .catch((error) => console.log(error));
 };
 
 export const getComments = async (pokeName) => {
   let comments = [];
   await fetch(
-    `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/comments?item_id=${pokeName}`,
+    `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${appId}/comments?item_id=${pokeName}`,
   )
     .then((res) => res.json())
     .then((data) => (comments = data))

@@ -25,7 +25,7 @@ document
 
 document.querySelector('#modal-form').addEventListener('submit', (e) => {
   e.preventDefault();
-  const pokeName = document.querySelector('.modal-title').innerText;
+  const pokeName = document.querySelector('.modal-title').innerText.toLowerCase();
   commentSubmit(pokeName);
 });
 
