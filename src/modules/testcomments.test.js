@@ -1,4 +1,5 @@
 import { getComments } from "./involvementApi";
+import 'whatwg-fetch';
 
 describe("Testing length of comments", () => {
   let pokeComments = "";

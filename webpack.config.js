@@ -3,9 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: {
-    bundle: path.resolve(__dirname, 'src/index.js'),
-  },
+  entry: ['whatwg-fetch' , path.resolve(__dirname, 'src/index.js'),],
   devServer: {
     static: './dist',
   },
