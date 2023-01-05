@@ -5,12 +5,12 @@ import handleLike from './likes.js';
 import { capitalizeFirstLetter } from './popUp.js';
 
 const getLikesFromPokemon = (likesList, pokeName) => {
-  let pokeLikes = likesList.find((pokemon) => pokemon.item_id === pokeName)
+  let pokeLikes = likesList.find((pokemon) => pokemon.item_id === pokeName);
   if (pokeLikes !== undefined) {
-    pokeLikes = pokeLikes.likes
+    pokeLikes = pokeLikes.likes;
   }
-  return pokeLikes
-}
+  return pokeLikes;
+};
 
 export const createPokeCard = (name, imgSrc, likes, type) => {
   const divCard = document.createElement('div');
@@ -79,7 +79,7 @@ export const pokeFetch = async () => {
     await fetch(el.url)
       .then((response) => response.json())
       .then(async (data) => {
-        const pokeLikes = getLikesFromPokemon(likesList, data.name)
+        const pokeLikes = getLikesFromPokemon(likesList, data.name);
         createPokeCard(
           data.name,
           data.sprites.other['official-artwork'].front_default,

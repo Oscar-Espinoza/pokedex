@@ -30,7 +30,7 @@ export const getLikes = async () => {
   return likes;
 };
 
-export const postComment = async(pokeName, username, comment) => {
+export const postComment = async (pokeName, username, comment) => {
   await fetch(
     `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${appId}/comments`,
     {

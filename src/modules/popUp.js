@@ -1,3 +1,5 @@
+/* eslint-disable no-prototype-builtins */
+
 import { getComments } from './involvementApi.js';
 import { injectComment } from './comment.js';
 
@@ -14,13 +16,12 @@ export const updateModal = async (modal, pokemon) => {
   commentsList.innerHTML = '';
 
   if (!comments.hasOwnProperty('error')) {
-
     modal.querySelector(
       '#comment-counter',
     ).innerHTML = `<p>Comments: <span id='comment-amount'>${comments.length}</span></p>`;
 
     comments.forEach((comment) => {
-      injectComment(comment)
+      injectComment(comment);
     });
   } else {
     modal.querySelector(

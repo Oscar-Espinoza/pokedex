@@ -1,16 +1,18 @@
+/* eslint-disable camelcase */
+
 import { postComment } from './involvementApi.js';
 
 const updateCommentsAmount = () => {
   const commentAmount = document.getElementById('comment-amount');
-  const newAmount = parseInt(commentAmount.innerText) + 1
-  commentAmount.innerText = newAmount
-}
+  const newAmount = parseInt(commentAmount.innerText, 10) + 1;
+  commentAmount.innerText = newAmount;
+};
 
 export const injectComment = (comment) => {
   const modal = document.getElementById('exampleModal');
   const newComment = document.createElement('li');
-  newComment.classList.add('comment', 'list-group-item', 'text-start', 'p-2')
-  newComment.innerHTML = `<span class="fst-italic">${comment.creation_date}</span> <span class="h6">${comment.username}</span>: <span>${comment.comment}</span>`  
+  newComment.classList.add('comment', 'list-group-item', 'text-start', 'p-2');
+  newComment.innerHTML = `<span class="fst-italic">${comment.creation_date}</span> <span class="h6">${comment.username}</span>: <span>${comment.comment}</span>`;
   modal.querySelector('#comments').appendChild(newComment);
 };
 
@@ -22,8 +24,8 @@ const commentSubmit = (pokeName) => {
   const day = time.getDay();
   const year = time.getFullYear();
   const creation_date = `${year}-${month}-${day}`;
-  injectComment({username, comment, creation_date})
-  updateCommentsAmount()
+  injectComment({ username, comment, creation_date });
+  updateCommentsAmount();
   postComment(pokeName, username, comment);
   document.querySelector('#username').value = '';
   document.querySelector('#comment').value = '';
