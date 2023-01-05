@@ -1,18 +1,19 @@
 import { getLikes } from './involvementApi';
 import { handleLike } from './likes';
+import { capitalizeFirstLetter } from './popUp';
+
 export const createPokeCard = (name, imgSrc, likes, type) => {
   const divCard = document.createElement('div');
   divCard.classList.add('card', 'm-4', type);
   divCard.innerHTML = 
-    `<img src='${imgSrc}' id='${name}-img' class='card-img-top' alt='...' data-bs-toggle='modal' data-bs-name=${name} data-bs-img=${imgSrc} data-bs-target='#exampleModal'>
+    `<img src='${imgSrc}' id='${name}-img' class='card-img-top' alt='...' >
       <div class='card-body'>
         <div class='card-title d-flex justify-content-between'>
-            <h5 class='card-title'>${name}</h5>
+            <h5 class='card-title'>${capitalizeFirstLetter(name)}</h5>
             <h5 class='card-title'><i class='fa-regular fa-heart p-2 heart-icon'></i><span class='px-2'>${likes}</span>Likes</h5>
         </div>
         <div class='mx-auto d-grid'>
-            <a href='#' class='btn btn-primary mt-4'>Comments</a>
-            <a href='#' class='btn btn-primary mt-4'>Reservations</a>
+            <a class='btn btn-primary mt-4' data-bs-toggle='modal' data-bs-name=${name} data-bs-img=${imgSrc} data-bs-target='#exampleModal'>Comments</a>
         </div>
       </div>`;
   divCard.querySelector(".fa-heart").addEventListener("click", (e) => {
@@ -72,7 +73,7 @@ export const pokeFetch = async () => {
         createPokeCard(data.name, data.sprites.other['official-artwork'].front_default, likes ? likes : 0, data.types[0].type.name);
         pokemonList.push({
           name: data.name,
-          imgUrl: data.sprites.front_shiny,
+          imgUrl: data.sprites.other['official-artwork'].front_default,
           stats: data.stats,
           type: data.types[0].type.name
         });

@@ -26,3 +26,7 @@
 .btn-card {
   margin: auto;
 }
+
+strong {
+  font-weight: bold;
+}

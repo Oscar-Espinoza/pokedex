@@ -17,13 +17,14 @@ document
   .addEventListener("show.bs.modal", (e) => {
     const modal = e.target;
     const trigger = e.relatedTarget;
-    updateModal(modal, trigger);
+    const pokeName = trigger.getAttribute("data-bs-name")
+    const pokemon = pokemonList.filter((pokemon) => pokemon.name === pokeName)[0]
+    updateModal(modal, pokemon);
   });
 
 document.querySelector("#modal-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const pokeName = document.querySelector(".modal-title").innerText;
-  console.log(pokeName);
   commentSubmit(pokeName);
 });
 

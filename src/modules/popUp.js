@@ -1,15 +1,18 @@
-import { postComment, getComments } from "./involvementApi";
-import { commentSubmit } from "./comment";
+import { getComments } from "./involvementApi";
 
-export const updateModal = async (modal, trigger) => {
-  const pokeName = trigger.getAttribute("data-bs-name");
-  const pokeImgUrl = document.getElementById(`${pokeName}-img`).src;
+export const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export const updateModal = async (modal, pokemon) => {
+  const pokeName = pokemon.name
+  const pokeImgUrl = pokemon.imgUrl
   modal.querySelector("#modal-img").src = pokeImgUrl;
-  modal.querySelector("#exampleModalLabel").innerText = pokeName;
+  modal.querySelector("#exampleModalLabel").innerText = capitalizeFirstLetter(pokeName);
 
   const comments = await getComments(pokeName);
 
-  modal.querySelector("#comment-counter").innerHTML = comments.length;
+  modal.querySelector("#comment-counter").innerText = `Comments: ${comments.length}`;
 
   let output = "";
   comments.forEach((el) => {
@@ -20,5 +23,10 @@ export const updateModal = async (modal, trigger) => {
     `;
 
     modal.querySelector("#comments").innerHTML = output;
+  });
+
+  document.querySelectorAll('.stat').forEach(stat => {
+    const foundStat = pokemon.stats.find((element) => element.stat.name === stat.id)
+    stat.innerHTML = `<strong>${foundStat.stat.name}: </strong> ${foundStat.base_stat}`
   });
 };
