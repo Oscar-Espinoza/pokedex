@@ -9,7 +9,7 @@ export const updateModal = async (modal, pokemon) => {
   modal.querySelector('#modal-img').src = pokeImgUrl;
   modal.querySelector('#exampleModalLabel').innerText = capitalizeFirstLetter(pokeName);
   const comments = await getComments(pokeName);
-  const commentsList = document.getElementById('comments')
+  const commentsList = document.getElementById('comments');
 
   commentsList.innerHTML = '';
 
