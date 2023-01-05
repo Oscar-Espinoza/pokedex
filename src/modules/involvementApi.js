@@ -15,7 +15,7 @@ export const postLike = (pokeName) => {
     .then((data) => console.log(data));
 };
 
-export const getLikes = async () => {
+export const getLikes = async (pokeName) => {
   let likes = [];
   await fetch(
     "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/likes"
@@ -23,7 +23,8 @@ export const getLikes = async () => {
     .then((res) => res.json())
     .then((data) => (likes = data))
     .catch((error) => console.log(error));
-  return likes;
+  const pokeLikes = likes.find((pokemon) => pokemon.item_id == pokeName).likes;
+  return pokeLikes;
 };
 
 export const postComment = (pokeName, username, comment) => {
