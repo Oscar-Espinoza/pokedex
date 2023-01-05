@@ -63,9 +63,11 @@
 
 <!-- LIVE DEMO -->
 
-## 🚀 Live Demo <a name="live-demo"></a>
+## 🚀 Zoom Video & Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link Pending]()
+- [Zoom Video](https://drive.google.com/file/d/1fs45-OtzGWLMhOsZhKPy7a0aCFy1Gnin/view?usp=share_link)
+
+- [Live Demo Pokedex App](https://oscar-espinoza.github.io/pokedex/dist)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -87,9 +89,9 @@ and follow these steps.
 Clone this repository to your desired folder:
 
 1. Download the **Zip** file or clone the repo with:
-   `bash git clone git@github.com:gjuliao/leaderboard_js.git`
+   `bash git clone git@github.com:oscar-espinoza/pokedex.git`
 2. To access cloned directory run:
-   `bash cd awesome_books_modules `
+   `bash cd pokedex `
 3. Open it with the live server
 
 ### Install
@@ -146,7 +148,7 @@ You can deploy this project using:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](../../issues/).
+Feel free to check the [issues page]([../../issues/](https://github.com/Oscar-Espinoza/pokedex/issues)).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -156,7 +158,7 @@ Feel free to check the [issues page](../../issues/).
 
 > Write a message to encourage readers to support your project
 
-If you like this project...
+If you like this project please give us a star!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -166,7 +168,7 @@ If you like this project...
 
 > Give credit to everyone who inspired your codebase.
 
-I would like to thank...
+I would like to thank Microverse for making the introduction.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
