@@ -1,15 +1,16 @@
+/* eslint-disable no-console, no-return-assign */
 export const postLike = (pokeName) => {
   fetch(
-    "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/likes",
+    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/likes',
     {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         item_id: pokeName,
       }),
-    }
+    },
   )
     .then((res) => res.text())
     .then((data) => console.log(data));
@@ -18,7 +19,7 @@ export const postLike = (pokeName) => {
 export const getLikes = async () => {
   let likes = [];
   await fetch(
-    "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/likes"
+    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/likes',
   )
     .then((res) => res.json())
     .then((data) => (likes = data))
@@ -28,18 +29,18 @@ export const getLikes = async () => {
 
 export const postComment = (pokeName, username, comment) => {
   fetch(
-    "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/comments",
+    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/comments',
     {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         item_id: pokeName,
         username,
         comment,
       }),
-    }
+    },
   )
     .then((res) => res.text())
     .then((data) => console.log(data))
@@ -49,7 +50,7 @@ export const postComment = (pokeName, username, comment) => {
 export const getComments = async (pokeName) => {
   let comments = [];
   await fetch(
-    `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/comments?item_id=${pokeName}`
+    `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Pfhv1GPAtfgdcQ8y9tqr/comments?item_id=${pokeName}`,
   )
     .then((res) => res.json())
     .then((data) => (comments = data))

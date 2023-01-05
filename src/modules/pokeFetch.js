@@ -1,10 +1,12 @@
-import { getLikes } from './involvementApi';
-import { handleLike } from './likes';
+/* eslint-disable no-restricted-syntax */
+
+import { getLikes } from './involvementApi.js';
+import handleLike from './likes.js';
+
 export const createPokeCard = (name, imgSrc, likes, type) => {
   const divCard = document.createElement('div');
   divCard.classList.add('card', 'm-4', type);
-  divCard.innerHTML = 
-    `<img src='${imgSrc}' id='${name}-img' class='card-img-top' alt='...' data-bs-toggle='modal' data-bs-name=${name} data-bs-img=${imgSrc} data-bs-target='#exampleModal'>
+  divCard.innerHTML = `<img src='${imgSrc}' id='${name}-img' class='card-img-top' alt='...' data-bs-toggle='modal' data-bs-name=${name} data-bs-img=${imgSrc} data-bs-target='#exampleModal'>
       <div class='card-body'>
         <div class='card-title d-flex justify-content-between'>
             <h5 class='card-title'>${name}</h5>
@@ -15,50 +17,50 @@ export const createPokeCard = (name, imgSrc, likes, type) => {
             <a href='#' class='btn btn-primary mt-4'>Reservations</a>
         </div>
       </div>`;
-  divCard.querySelector(".fa-heart").addEventListener("click", (e) => {
+  divCard.querySelector('.fa-heart').addEventListener('click', (e) => {
     const likeBtn = e.target;
     handleLike(likeBtn, name);
   });
-  document.getElementById("cards").appendChild(divCard);
+  document.getElementById('cards').appendChild(divCard);
 };
 
 export const pokeFetch = async () => {
   const pokeChar = [
     {
       id: 0,
-      url: "https://pokeapi.co/api/v2/pokemon/ivysaur",
+      url: 'https://pokeapi.co/api/v2/pokemon/ivysaur',
     },
     {
       id: 1,
-      url: "https://pokeapi.co/api/v2/pokemon/squirtle",
+      url: 'https://pokeapi.co/api/v2/pokemon/squirtle',
     },
     {
       id: 2,
-      url: "https://pokeapi.co/api/v2/pokemon/wartortle",
+      url: 'https://pokeapi.co/api/v2/pokemon/wartortle',
     },
     {
       id: 3,
-      url: "https://pokeapi.co/api/v2/pokemon/blastoise",
+      url: 'https://pokeapi.co/api/v2/pokemon/blastoise',
     },
     {
       id: 4,
-      url: "https://pokeapi.co/api/v2/pokemon/charmander",
+      url: 'https://pokeapi.co/api/v2/pokemon/charmander',
     },
     {
       id: 5,
-      url: "https://pokeapi.co/api/v2/pokemon/charmeleon",
+      url: 'https://pokeapi.co/api/v2/pokemon/charmeleon',
     },
     {
       id: 6,
-      url: "https://pokeapi.co/api/v2/pokemon/venusaur",
+      url: 'https://pokeapi.co/api/v2/pokemon/venusaur',
     },
     {
       id: 7,
-      url: "https://pokeapi.co/api/v2/pokemon/charizard",
+      url: 'https://pokeapi.co/api/v2/pokemon/charizard',
     },
     {
-      'id': 8,
-      'url': 'https://pokeapi.co/api/v2/pokemon/vileplume'
+      id: 8,
+      url: 'https://pokeapi.co/api/v2/pokemon/vileplume',
     },
   ];
 
@@ -67,18 +69,25 @@ export const pokeFetch = async () => {
   const pokemonList = [];
 
   for (const el of pokeChar) {
-    await fetch(el.url)
+    fetch(el.url)
       .then((response) => response.json())
       .then((data) => {
-        const pokeLikes = likes.find((pokemon) => pokemon.item_id == data.name);
-        createPokeCard(data.name, data.sprites.other['official-artwork'].front_default, pokeLikes ? pokeLikes.likes : 0, data.types[0].type.name);
+        const pokeLikes = likes.find(
+          (pokemon) => pokemon.item_id === data.name,
+        );
+        createPokeCard(
+          data.name,
+          data.sprites.other['official-artwork'].front_default,
+          pokeLikes ? pokeLikes.likes : 0,
+          data.types[0].type.name,
+        );
         pokemonList.push({
           name: data.name,
           imgUrl: data.sprites.front_shiny,
           stats: data.stats,
-          type: data.types[0].type.name
+          type: data.types[0].type.name,
         });
       });
   }
   return pokemonList;
-}
+};
